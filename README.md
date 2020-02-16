@@ -1,6 +1,3 @@
-## References
-Based on https://github.com/wuhanstudio/alamode-docker (ubuntu version)
-
 ## Alamode
     https://github.com/ttadano/alamode
 
@@ -19,3 +16,6 @@ Based on https://github.com/wuhanstudio/alamode-docker (ubuntu version)
     docker run -it --rm -v $(pwd):/workplace alamode:1.0.2 anphon /workplace/si_phband.in
 
     docker run -it --rm -v $(pwd):/workplace alamode:1.0.2 bash
+
+## References
+Based on https://github.com/wuhanstudio/alamode-docker (ubuntu version)
