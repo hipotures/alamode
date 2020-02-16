@@ -15,4 +15,7 @@ Based on https://github.com/wuhanstudio/alamode-docker (ubuntu version)
     docker images
 
     cd alamode/example/Si
-    docker run -it --rm -v $(pwd):/home alamode:1.0.2 alm /home/si_alm.in
+    docker run -it --rm -v $(pwd):/workplace alamode:1.0.2 alm /workplace/si_alm.in
+    docker run -it --rm -v $(pwd):/workplace alamode:1.0.2 anphon /workplace/si_phband.in
+
+    docker run -it --rm -v $(pwd):/workplace alamode:1.0.2 bash
