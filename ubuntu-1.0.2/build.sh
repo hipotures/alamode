@@ -1,0 +1,1 @@
+docker image build -t alamode:1.0.2 .

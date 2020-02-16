@@ -57,33 +57,25 @@ RUN cp librefblas.a /usr/lib/
 # ALAMODE
 # ---------------------------------------------------------------
 
-RUN git clone http://github.com/ttadano/alamode.git /opt/alamode
+RUN wget https://github.com/ttadano/alamode/archive/v.1.0.2.tar.gz && \
+    tar xvfz v.1.0.2.tar.gz && \
+    rm v.1.0.2.tar.gz && \
+    mv alamode-v.1.0.2 /opt/alamode
+
 
 # TOOLS
 WORKDIR /opt/alamode/tools
 COPY Makefile.TOOLS Makefile
-# CXX = g++
-# CXXFLAGS = -O2 -std=c++11
 RUN make
 
 # ANPHON
 WORKDIR /opt/alamode/anphon
 COPY Makefile.ANPHON Makefile
-#CXXFLAGS = -O3 -fopenmp -std=c++11
-#LDfLAGS = -lfftw3 -llapacke -llapack -lrefblas
-# anphon: ${OBJS}
-	# ${LINKER} ${CXXFLAGS} -o $@ ${OBJS} ${LIBS} $(LDFLAGS)
 RUN make
 
 # ALM
 WORKDIR /opt/alamode/alm
 COPY Makefile.ALM Makefile
-# CXX = g++
-# CXXFLAGS = -O2 -std=c++11
-# LDFLAGS = -llapacke -llapack -lrefblas -lgfortran -lblas
-# LAPACK= -L /opt/lapack/lapack-3.8.0
-#alm: ${OBJS}
-#        ${CXXL} ${CXXFLAGS} -o $@ ${OBJS} ${LIBS} ${LDFLAGS}
 RUN make
 
 RUN mkdir /opt/work_dir
