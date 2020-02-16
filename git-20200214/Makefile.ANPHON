@@ -1,0 +1,46 @@
+.SUFFIXES: .h .cpp
+#-----------------------------------------------
+# Makefile for the program 'ANPHON'.
+# Please modify the variables properly.
+# We recommend to use Intel c++ compiler.
+#-----------------------------------------------
+
+MPICXX = mpicxx 
+CXXFLAGS = -O3 -fopenmp -std=c++11
+INCLUDE = -I../include 
+
+LINKER = ${MPICXX}
+LDFLAGS = -lfftw3 -llapacke -llapack -lrefblas 
+
+LAPACK = 
+LIBS = ${LAPACK}
+
+#----------------------------------------------
+# General rules
+#----------------------------------------------
+
+.cpp.o:
+	${MPICXX} ${CXXFLAGS} ${INCLUDE} -c $<
+
+PROG = anphon
+
+CXXSRC = $(wildcard *.cpp)
+
+OBJS= ${CXXSRC:.cpp=.o}
+
+default: anphon
+
+all: ${PROG}
+
+anphon: ${OBJS}
+	${LINKER} ${CXXFLAGS} -o $@ ${OBJS} ${LIBS} $(LDFLAGS)
+
+clean:
+	rm -f ${OBJS}
+
+.PHONY: clean
+
+depend:
+	gcc -MM *.cpp > .depend
+
+-include .depend
